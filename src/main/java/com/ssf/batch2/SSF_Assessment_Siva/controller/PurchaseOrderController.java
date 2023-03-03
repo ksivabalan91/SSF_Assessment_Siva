@@ -1,5 +1,6 @@
 package com.ssf.batch2.SSF_Assessment_Siva.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssf.batch2.SSF_Assessment_Siva.model.Items;
+import com.ssf.batch2.SSF_Assessment_Siva.model.Quotation;
 import com.ssf.batch2.SSF_Assessment_Siva.service.ItemsService;
+import com.ssf.batch2.SSF_Assessment_Siva.service.QuotationService;
 
 @Controller
 @RequestMapping("/")
@@ -21,6 +24,9 @@ public class PurchaseOrderController {
 
 @Autowired
 private ItemsService itemsSvc;
+
+@Autowired
+private QuotationService quotationService;
 
     @GetMapping("/")
     public String getHome(Model model){       
@@ -61,8 +67,14 @@ private ItemsService itemsSvc;
     }
 
     @GetMapping(path="/shippingaddress")
-    public String ship(){
-
+    public String ship() throws Exception{
+        List<Items> cart = itemsSvc.getCart();
+        List<String> items = new LinkedList<>();
+        Quotation quote = new Quotation();
+        for(Items i:cart){
+            items.add(i.getName());
+        }
+        quote = quotationService.getQuotations(items);
         return "view2";
     }
 

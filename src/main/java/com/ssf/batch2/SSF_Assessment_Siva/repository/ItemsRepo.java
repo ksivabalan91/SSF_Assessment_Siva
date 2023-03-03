@@ -42,18 +42,5 @@ public class ItemsRepo {
     public void printCart(){
         System.out.println(cart.toString());
     }
-
-    // private Map<String,Integer> cart = new HashMap<>();
-
-    // public void addToCart(String name, int quantity){
-
-    //     if(cart.containsKey(name)){
-    //         int newQuantity = cart.get(name)+quantity;
-    //         cart.put(name, newQuantity);            
-    //     }else{
-    //         cart.put(name, quantity);
-    //     }
-    // }
-
     
 }

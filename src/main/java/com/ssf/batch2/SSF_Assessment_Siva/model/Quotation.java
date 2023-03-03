@@ -1,4 +1,4 @@
-// TODO: Add your package here
+package com.ssf.batch2.SSF_Assessment_Siva.model;
 
 // DO NOT MODIFY THIS FILE
 
