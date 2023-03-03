@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>View 1</title>
+	</head>
+	<body>
+		<!--
+			Feel free to make changes to this HTML but do no change the option in select
+		-->
+
+		<h1>Shopping Cart</h1>
+
+		<table>
+			<form action="/cart", method="post" >			
+				
+				<tr>
+					<td>Item:</td>
+					<td>
+						<select name="item">
+							<option value="apple">Apple</option>
+							<option value="orange">Orange</option>
+							<option value="bread">Bread</option>
+							<option value="cheese">Cheese</option>
+							<option value="chicken">Chicken</option>
+							<option value="mineral_water">Mineral Water</option>
+							<option value="instant_noodles">Instant Noodles</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td>
+						<input type="number" name="quantity" size="4" placeholder="Quantity">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div >
+							<button type="submit">Add</button>
+						</div>						
+					</td>
+					<td>
+						<div data-th-if="${isEmpty}">
+							<button type="submit" formmethod="get" formaction="/shippingaddress" >Next</button>
+						</div>						
+					</td>
+				</tr>				
+			</form>
+			<tr>
+				<td data-th-unless="${isEmpty}">
+					your cart is empty
+				</td>
+			</tr>
+			<div data-th-if="${isEmpty}">
+				<tr data-th-each="i:${cart}">
+					<td><span data-th-text="${i.name}"></span></td>
+					<td><span data-th-text="${i.quantity}"></span></td>
+				</tr>
+			</div>
+		</table>
+		
+	</body>
+</html>
