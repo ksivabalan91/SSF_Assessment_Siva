@@ -15,7 +15,7 @@ public class ItemsRepo {
     
     public void addToCart(String name, int quantity){
         
-        System.out.println("repo"+name+quantity);
+        // System.out.println("repo"+name+quantity);
 
         if (cart.isEmpty()) {
             cart.add(new Items(name, quantity));
@@ -37,6 +37,10 @@ public class ItemsRepo {
 
     public List<Items> getCart(){
         return cart;
+    }
+
+    public void clearCart(){
+        cart.clear();
     }
 
     public void printCart(){

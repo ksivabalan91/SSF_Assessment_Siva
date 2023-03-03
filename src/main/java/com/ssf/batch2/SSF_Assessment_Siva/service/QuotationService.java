@@ -28,14 +28,16 @@ public class QuotationService {
             jsonArrBuilder.add(i);
         }    
         JsonArray jsonArr = jsonArrBuilder.build();
+
+        System.out.println(jsonArr.toString());
         
         String url = "https://quotation.chuklee.com/quotation";
        
-        RequestEntity<JsonArray> req = RequestEntity
+        RequestEntity<String> req = RequestEntity
             .post(url)
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(jsonArr);
+            .body(jsonArr.toString());
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = null;
@@ -55,16 +57,18 @@ public class QuotationService {
         JsonReader jsonReader = Json.createReader(new StringReader(payload));
         JsonObject jsonObject = jsonReader.readObject();
 
+        System.out.println(jsonObject.toString());
+
         Quotation quote = new Quotation();
         
-        String quoteID = jsonObject.getString("quoteID");
+        String quoteID = jsonObject.getString("quoteId");
         quote.setQuoteId(quoteID);
 
         JsonArray jsonQuoteArr = jsonObject.getJsonArray("quotations");
 
         for(int i = 0; i< jsonQuoteArr.size();i++){
             
-            String item = jsonQuoteArr.getJsonObject(i).getString("items");
+            String item = jsonQuoteArr.getJsonObject(i).getString("item");
             float unitPrice = jsonQuoteArr.getJsonObject(i).getJsonNumber("unitPrice").bigDecimalValue().floatValue();
 
             quote.addQuotation(item, unitPrice);

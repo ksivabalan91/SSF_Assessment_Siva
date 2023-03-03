@@ -49,7 +49,7 @@ private QuotationService quotationService;
         String name = form.getFirst("item");
         int quantity = Integer.parseInt(form.getFirst("quantity")) ;
         
-        System.out.println("controller"+name+quantity);
+        // System.out.println("controller"+name+quantity);
 
         itemsSvc.addItems(name, quantity);
         List<Items> cart = itemsSvc.getCart();
@@ -68,14 +68,27 @@ private QuotationService quotationService;
 
     @GetMapping(path="/shippingaddress")
     public String ship() throws Exception{
+        return "view2";
+    }
+
+    @PostMapping(path="/checkout")
+    public String checkout(@RequestBody MultiValueMap<String,String> form, Model model) throws Exception{
         List<Items> cart = itemsSvc.getCart();
         List<String> items = new LinkedList<>();
         Quotation quote = new Quotation();
-        for(Items i:cart){
-            items.add(i.getName());
-        }
+        for(Items i:cart){items.add(i.getName());}
+
+        // System.out.println(items.toString());
         quote = quotationService.getQuotations(items);
-        return "view2";
+
+        model.addAttribute("id", quote.getQuoteId());
+        model.addAttribute("name", form.getFirst("name"));
+        model.addAttribute("address", form.getFirst("address"));
+        model.addAttribute("cost", itemsSvc.calculateCost(quote));
+
+        itemsSvc.clearCart();
+        
+        return "view3";
     }
 
 

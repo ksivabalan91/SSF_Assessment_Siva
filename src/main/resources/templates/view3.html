@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <table>
+            <th>
+                Invoice
+            </th>
+            <tr>
+                <td>Invoice id:</td>
+                <td>
+                    <span data-th-text="${id}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <span data-th-text="${name}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>
+                    <span data-th-text="${address}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Total cost:</td>
+                <td>
+                    <span data-th-text="${cost}"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
