@@ -25,12 +25,10 @@ public class ItemsService {
     public float calculateCost(Quotation quote){
         List<Items> cart = itemsRepo.getCart();
         float cost = 0.0f;
-
         for(Items i:cart){
             float price = quote.getQuotation(i.getName());
             cost += price* i.getQuantity();
-        }
-        
+        }        
         return cost;
     }
     public void clearCart(){
